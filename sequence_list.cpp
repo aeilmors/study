@@ -23,6 +23,8 @@ typedef struct SqList {
 	ElemType *data;
 	unsigned int list_size;
 	unsigned int length;
+
+	//SqList operator = (const SqList &L);
 }SqList, *pSq;
 
 bool compare(const ElemType &e1, const ElemType &e2)
@@ -118,7 +120,7 @@ bool ListInsert(SqList &L, int i, ElemType e)
 			L.data = (ElemType *)realloc(L.data, (L.list_size + LIST_INCREAMENT) * sizeof(ElemType));
 			L.list_size += LIST_INCREAMENT;
 		}
-		for (int index = L.length - 1; index >= i - 1; ++index) {
+		for (int index = L.length; index >= i; --index) {
 			L.data[index] = L.data[index - 1];
 		}
 		L.data[i -1] = e;
@@ -171,7 +173,148 @@ int LocateElem(const SqList &L, ElemType e, bool (*compare)(const ElemType &e1, 
 	}
 }
 
+bool sort(SqList &L)
+{
+	if (!(L.list_size && L.length)) 
+	{
+		cout << "SqList does not exist or there is no data in SqList" << endl;
+		return false;
+	} else {
+		ElemType min;
+		for (int i = 0; i < L.length - 1; ++i) {
+			min = L.data[i];
+			for (int j = i + 1; j < L.length; ++j) {
+				if (min > L.data[j]) {
+					min += L.data[j];
+					L.data[j] = min - L.data[j];
+					min -= L.data[j];
+				}
+			}
+			L.data[i] = min;
+		}
 
+		return true;
+	}
+}
+
+bool DeleteFromSToTSorted(SqList &L, ElemType s, ElemType t)
+{
+	if (t <= L.data[0] || s >= L.data[L.length - 1] || s >= t || !L.length || !L.list_size) {
+		cout << "SqList does not exist or incorrect parameters" << endl;
+		return false;
+	} else {
+		int count = 0;
+		int begin = -1, end = -1;
+		for (int index = 0; index < L.length; ++index) {
+			if (L.data[index] > s && L.data[index] < t) {
+				begin =  index;
+				break;
+			}
+		}
+		for (int index = L.length - 1; index >= begin; --index) {
+			if (L.data[index] > s && L.data[index] < t) {
+				end = index;
+				break;
+			}
+		}
+
+		if (begin < 0 || end < 0) {
+			cout << "There is no data between " << s << " and " << t << endl;
+			return false;
+		}
+		count = end - begin + 1;
+
+		for (int index = begin; index <= L.length - count - 1; ++index) {
+			L.data[index] = L.data[index + count];
+		}
+		L.length -= count;
+
+		return true;
+	}
+}
+
+bool DeleteFromSToT(SqList &L, ElemType s, ElemType t)
+{
+	if (s >= t || !L.length || !L.list_size) {
+		cout << "No data in SqList or incorrect input or SqList does not exist" << endl;
+		return false;
+	} else {
+		int count = 0;
+		for (int index = 0; index < L.length; ++index) {
+			if (L.data[index] > s && L.data[index] < t) {
+				++count;
+			} else {
+				L.data[index - count] = L.data[index];
+			}
+		}
+
+		if (!count) {
+			cout << "There is no data between " << s << " and " << t << endl;
+			return false;
+		} else {
+			L.length -= count;
+			return true;
+		}
+	}
+}
+
+bool DeleteRepeatedElemSorted(SqList &L)
+{
+	if (!L.length || !L.list_size) {
+		cout << "SqList does not exist or no data in SqList" << endl;
+		return false;
+	} else {
+		int count = 0;
+		for (int index = 1; index < L.length; ++index) {
+			if (L.data[index] == L.data[index - 1]) {
+				++count;
+			} else {
+				L.data[index - count] = L.data[index];
+			}
+		}
+
+		if (count) {
+			cout << "Done" << endl;
+			return true;
+		} else {
+			cout << "There is no repeated data" << endl;
+			return false;
+		}
+	}
+}
+
+SqList Merge(const SqList &L1, const SqList &L2)
+{
+	SqList resultSL;
+	InitList(resultSL);
+	for (int index = 0; index < L1.length; ++index) {
+		ListInsert(resultSL, index + 1, L1.data[index]);
+	}
+	for (int index = 0; index < L2.length; ++index) {
+		ListInsert(resultSL, index + L1.length + 1, L2.data[index]);
+	}
+
+	resultSL.length = L1.length + L2.length;
+	// ListTraverse(resultSL);
+
+	return resultSL;
+}
+/*
+SqList SqList::operator = (const SqList &L)
+{
+	SqList result;
+	result.length = L.length;
+	result.list_size = L.list_size;
+	result.data = (ElemType *)malloc(sizeof(ElemType) * L.list_size);
+
+	for (int index = 0; index < L.length; ++index) {
+		result.data[index] = L.data[index];
+	}
+
+	ListTraverse(result);
+	return result;
+}
+*/
 void Menu()
 {
 	cout << "*****************************************************" << endl;
@@ -182,22 +325,34 @@ void Menu()
 	cout << "7.Prior                      8.Length" << endl;
 	cout << "9.Next                       10.Delete" << endl;
 	cout << "11.Traverse                  12.Inversion" << endl;
-	cout << "13.DeleteMin                 0.Quit" << endl;
+	cout << "13.DeleteMin                 14.DeleteAllX" << endl;
+	cout << "15.Sort                      16.DeleteFromSToTSorted" << endl;
+	cout << "17.DeleteFromSToT            18.DeleteRepeatedElemSorted" << endl;
+	cout << "19.Merge" << endl;
+	cout << "0.Quit" << endl;
 	cout << "*****************************************************" << endl;
 }
+
 bool DeleteMin(SqList &L, ElemType &e);
 bool Inversion(SqList &L);
+bool DeleteAllX(SqList &L, ElemType x);
 
 int main()
 {
 	int choice;
 	ElemType e, ee;
 	int param;
-	SqList L;
+	SqList L, L1, L2;
+
+	ElemType init_array[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+	L2.data = init_array;
+	L2.length = sizeof init_array / sizeof(int);
+	L2.list_size = L2.length;
 	L.list_size = 0;
 
+
 	Menu();
-	while (cin >> choice && choice > 0 && choice < 14) {
+	while (cin >> choice && choice > 0 && choice < 20) {
 		switch(choice) {
 			case 1:
 				InitList(L);
@@ -335,11 +490,47 @@ int main()
 					cout << "List does not exist" << endl;
 				}
 				break;
-			// case 2:
-			// case 2:
-			// case 2:
-			// case 2:
-			// case 2:
+			case 14:
+				cout << "Enter the X:" << endl;
+				cin >> e;
+				DeleteAllX(L, e);
+				break;
+			case 15:
+				if (sort(L)) {
+					cout << "Done!" << endl;
+				}
+				break;
+			case 16:
+				cout << "Enter 2 element:" << endl;
+				cin >> e >> ee;
+				if (DeleteFromSToTSorted(L, e, ee)) {
+					cout << "Done" << endl;
+				}
+				break;
+			case 17:
+				cout << "Enter 2 element:" << endl;
+				cin >> e >> ee;
+				if (DeleteFromSToT(L, e, ee)) {
+					cout << "Done" << endl;
+				}
+				break;
+			case 18:
+				if (DeleteRepeatedElemSorted(L)) {
+					cout << "Done" << endl;
+				}
+				break;
+			case 19:
+				if (L.list_size && L.length) {
+					cout << L.length << ' ' << L2.length << endl;
+					cout << L.list_size << ' ' << L2.list_size << endl;
+					L = Merge(L, L2);
+					cout << L.length << endl;
+					cout << L.list_size << endl;
+					cout << "Done" << endl;
+				} else {
+					cout << "Invalid SqList" << endl;
+				}
+				break;
 			default :
 				break;
 		}
@@ -392,4 +583,26 @@ bool Inversion(SqList &L)
 	}
 
 	return true;
+}
+
+bool DeleteAllX(SqList &L, ElemType x)
+{
+	if (!L.list_size) {
+		cout << "The SqList does not exist" << endl;
+		return false;
+	} else {
+		int index = 0;
+		int k = 0;
+		while (index != L.length) {
+			if (L.data[index] != x) {
+				L.data[k] = L.data[index];
+				++k;
+			}
+			++index;
+		}
+		L.length = k;
+
+		cout << "Done" << endl;
+		return true;
+	}
 }
