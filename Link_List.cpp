@@ -41,16 +41,20 @@ bool ListInsert(LinkList &L, int i, Elemtype e);
 bool ListDelete(LinkList &L, int i, Elemtype &e);
 void ListTraverse(const LinkList &L);
 
+void Sort(LinkList &L);
+void HeadInsert(LinkList &L);
+void TailInsert(LinkList &L);
+void MergeDecrease(LinkList &L1, LinkList &L2);
 
 int main()
 {
-	LinkList L = 0;
+	LinkList L = 0, LL = 0;
 	Elemtype e, ee;
 	int choice;
 	int param;
 
 	Menu();
-	while(cin >> choice && choice > 0 && choice < 13) {
+	while(cin >> choice && choice > 0 && choice < 15) {
 		switch (choice) {
 			case 1:
 				if (L) {
@@ -169,6 +173,27 @@ int main()
 					ListTraverse(L);
 				}
 				break;
+			case 13:
+				if (!L) {
+					cout << WARNING << endl;
+				} else {
+					Sort(L);
+					cout << "Done" << endl;
+				}
+				break;
+			case 14:
+				if (!L) {
+					cout << WARNING << endl;
+				} else {
+					cout << "Create another LinkList" << endl;
+					InitList(LL);
+					HeadInsert(LL);
+					Sort(LL);
+					ListTraverse(LL);
+					MergeDecrease(L, LL);
+					cout << "Done" << endl;
+				}
+				break;
 			default :
 				break;
 		}
@@ -206,7 +231,7 @@ void Menu()
 	cout << "7.LocateElem             8.PriorElem" << endl;
 	cout << "9.NextElem               10.Insert" << endl;
 	cout << "11.Delete                  12.ListTraverse" << endl;
-	// cout << "13.DeleteMin                 14.DeleteAllX" << endl;
+	cout << "13.Sort                      14.MergeDecrease" << endl;
 	// cout << "15.Sort                      16.DeleteFromSToTSorted" << endl;
 	// cout << "17.DeleteFromSToT            18.DeleteRepeatedElemSorted" << endl;
 	// cout << "19.Merge" << endl;
@@ -432,4 +457,87 @@ void ListTraverse(const LinkList &L)
 		Visit(*p);
 		p = p->next;
 	}
+}
+
+void Sort(LinkList &L)
+{
+	LinkList p = L->next, q;
+	Elemtype temp;
+
+	while (p) {
+		q = p->next;
+		while (q) {
+			if (p->data > q->data) {
+				temp = p->data;
+				p->data = q->data;
+				q->data = temp;
+			}
+			q = q->next;
+		}
+		p = p->next;
+	}
+}
+
+void HeadInsert(LinkList &L)
+{
+	Elemtype e;
+	LinkList p;
+	cout << "Enter some data to Insert, end with 999" << endl;
+
+	while (cin >> e && e != 999) {
+		LinkList p_node;
+		p = L;
+		p_node = (LinkList)malloc(sizeof(LNode));
+
+		p_node->data = e;
+		p_node->next = p->next;
+		p->next = p_node;
+	}
+}
+
+void TailInsert(LinkList &L)
+{
+	Elemtype e;
+	LinkList p = L;
+	cout << "Enter some data to Insert, end with 999" << endl;
+
+	while (cin >> e && e != 999) {
+		LinkList p_node;
+		p_node = (LinkList)malloc(sizeof(LNode));
+
+		p_node->data = e;
+		p_node->next = NULL;
+		p->next = p_node;
+		p = p->next;
+	}
+}
+
+void MergeDecrease(LinkList &L1, LinkList &L2)
+{
+	LinkList p1, p2, temp1, temp2, ready = 0;
+	p1 = L1->next;
+	p2 = L2->next;
+
+	while (p1 && p2) {
+		temp1 = p1->next;
+		temp2 = p2->next;
+		if (p1->data < p2->data) {
+			p1->next = ready;
+			ready = p1;
+			p1 = temp1;
+		} else {
+			p2->next = ready;
+			ready = p2;
+			p2 = temp2;
+		}
+	}
+	LinkList rest;
+	rest = p1 ? p1 : p2;
+	while (rest) {
+		temp1 = rest->next;
+		rest->next = ready;
+		ready = rest;
+		rest = temp1;
+	}
+	L1->next = ready;
 }
