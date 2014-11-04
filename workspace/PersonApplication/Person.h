@@ -12,6 +12,8 @@
 #include <string>
 
 class Person {
+	friend std::istream &read(std::istream &, Person &);
+	friend std::ostream &print(std::ostream &, const Person &);
 public:
 	Person() = default;
 	Person(const std::string &name, const std::string &address) : name(name), address(address) {}
@@ -21,7 +23,7 @@ public:
 	const std::string &getName() const;
 	const std::string &getAddress() const;
 
-//private:
+private:
 	std::string name;
 	std::string address;
 };
