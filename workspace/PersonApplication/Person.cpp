@@ -37,7 +37,7 @@ std::ostream &print(std::ostream &os, const Person &person) {
 	return os;
 }
 
-int main()
-{
-
-}
+//int main()
+//{
+//
+//}
