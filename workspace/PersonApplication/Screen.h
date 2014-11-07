@@ -56,7 +56,7 @@ inline Screen &Screen::set(pos row, pos col, char c)
 
 inline void Screen::do_display(std::ostream &os) const {
 	for (pos index = 0; index != contents.size(); ++index) {
-		if (!(index % width)) {
+		if (!(index % width) && index) {
 			os << std::endl;
 		}
 		os << contents[index];
