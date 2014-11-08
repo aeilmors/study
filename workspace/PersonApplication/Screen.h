@@ -23,6 +23,7 @@ public:
 	void some_member() const;
 
 	friend class WindowMrg;
+//	friend WindowMrg::Clear(ScreenIndex);
 
 private:
 	pos cursor = 0;	//current cursor position
