@@ -23,7 +23,7 @@ public:
 	void some_member() const;
 
 	friend class WindowMrg;
-//	friend WindowMrg::Clear(ScreenIndex);
+//	friend WindowMrg::Clear(ScreenIndex);	//first WindowMrg and declare Clear(), then Screen, then define Clear()
 
 private:
 	pos cursor = 0;	//current cursor position
