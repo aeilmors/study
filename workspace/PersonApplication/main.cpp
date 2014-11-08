@@ -11,7 +11,6 @@
 #include "Screen.h"
 #include "SalesData.h"
 #include "Person.h"
-#include "WindowMrg.h"
 
 using namespace std;
 

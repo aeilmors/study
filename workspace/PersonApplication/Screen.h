@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
+//#include "WindowMrg.h"
 
 class Screen {
 public:
@@ -19,6 +21,8 @@ public:
 	Screen &display(std::ostream &os) {do_display(os); return *this;}
 	const Screen &display(std::ostream &os)const {do_display(os); return *this; }
 	void some_member() const;
+
+	friend class WindowMrg;
 
 private:
 	pos cursor = 0;	//current cursor position
@@ -63,4 +67,15 @@ inline void Screen::do_display(std::ostream &os) const {
 	}
 	os << std::endl;
 }
+
+class WindowMrg {
+public:
+	using ScreenIndex = std::vector<Screen>::size_type;
+	void Clear(ScreenIndex);
+	WindowMrg() = default;
+	virtual ~WindowMrg();
+private:
+	std::vector<Screen> screens{ Screen(24, 80, ' ') };
+};
+
 #endif
