@@ -4,7 +4,17 @@
 #include <string>
 #include <iostream>
 
+struct SalesData;
+
+SalesData Add(const SalesData &, const SalesData &);
+std::ostream &print(std::ostream &, const SalesData &);
+std::istream &read(std::istream &, SalesData &);
+
 struct SalesData {
+	SalesData(std::string s, unsigned cnt, double price) : book_no(s), units_sold(cnt), revenue(cnt * price) {std::cout << 1 << std::endl;}
+	SalesData() : SalesData("s", 1, 0) {std::cout << 2 << std::endl;}
+	SalesData(std::string s) : SalesData(s, 0, 0) {std::cout << 3 << std::endl;}
+	SalesData(std::istream &is) : SalesData() { read(is, *this); std::cout << 4 << std::endl; }
 	std::string Isbn() const {return book_no;}
 	SalesData &Combine(const SalesData &);
 	inline double AvgPrice() const;
@@ -13,8 +23,5 @@ struct SalesData {
 	double revenue = 0.0;		//Sold total money
 };
 
-SalesData Add(const SalesData &, const SalesData &);
-std::ostream &print(std::ostream &, const SalesData &);
-std::istream &read(std::istream &, SalesData &);
 
 #endif

@@ -21,6 +21,7 @@ public:
 	Screen &display(std::ostream &os) {do_display(os); return *this;}
 	const Screen &display(std::ostream &os)const {do_display(os); return *this; }
 	void some_member() const;
+	pos size() const;
 
 	friend class WindowMrg;
 //	friend WindowMrg::Clear(ScreenIndex);	//first WindowMrg and declare Clear(), then Screen, then define Clear()
@@ -72,9 +73,11 @@ inline void Screen::do_display(std::ostream &os) const {
 class WindowMrg {
 public:
 	using ScreenIndex = std::vector<Screen>::size_type;
-	void Clear(ScreenIndex);
 	WindowMrg() = default;
 	virtual ~WindowMrg();
+
+	void Clear(ScreenIndex);
+	ScreenIndex addScreen(const Screen &s);
 private:
 	std::vector<Screen> screens{ Screen(24, 80, ' ') };
 };

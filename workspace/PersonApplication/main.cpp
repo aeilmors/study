@@ -16,11 +16,18 @@ using namespace std;
 
 int main()
 {
-	Screen myscreen(5, 5, 'X');
+//	Screen myscreen(5, 5, 'X');
 //	const Screen kscreen(5, 3, 'k');
 //	myscreen.set('#').display(cout);
 //	kscreen.display(cout);
-	myscreen.move(4, 0).set('#').display(cout);
+//	myscreen.move(4, 0).set('#').display(cout);
+//	string::size_type foo;
+//	foo = myscreen.width;
+
+	SalesData sd1();
+//	SalesData sd2("C++");
+//	SalesData sd3("Python", 1, 20);
+//	SalesData sd4(cin);
 
 	return 0;
 }
