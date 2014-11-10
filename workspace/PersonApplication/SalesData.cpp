@@ -1,6 +1,6 @@
 #include "SalesData.h"
 
-SalesData &SalesData::Combine(const SalesData& item)
+SalesData &SalesData::Combine(const SalesData &item)
 {
 	units_sold += item.units_sold;
 	revenue += item.revenue;

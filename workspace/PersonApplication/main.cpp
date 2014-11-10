@@ -11,6 +11,7 @@
 #include "Screen.h"
 #include "SalesData.h"
 #include "Person.h"
+#include "WindowMgr.h"
 
 using namespace std;
 
@@ -25,6 +26,11 @@ int main()
 //	foo = myscreen.width;
 
 	SalesData sd1;	//SalesData sd1() is s declaration of a function
+	print(cout, sd1);
+	cout << endl;
+	sd1.Combine(string("s"));
+	print(cout, sd1);
+	cout << endl;
 //	SalesData sd2("C++");
 //	SalesData sd3("Python", 1, 20);
 //	SalesData sd4(cin);
