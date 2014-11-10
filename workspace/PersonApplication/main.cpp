@@ -24,7 +24,7 @@ int main()
 //	string::size_type foo;
 //	foo = myscreen.width;
 
-	SalesData sd1();
+	SalesData sd1;	//SalesData sd1() is s declaration of a function
 //	SalesData sd2("C++");
 //	SalesData sd3("Python", 1, 20);
 //	SalesData sd4(cin);
