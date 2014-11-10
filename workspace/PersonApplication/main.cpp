@@ -28,7 +28,7 @@ int main()
 	SalesData sd1;	//SalesData sd1() is s declaration of a function
 	print(cout, sd1);
 	cout << endl;
-	sd1.Combine(string("s"));
+//	sd1.Combine(string("s"));	//explicit ban convert
 	print(cout, sd1);
 	cout << endl;
 //	SalesData sd2("C++");

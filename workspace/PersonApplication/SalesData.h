@@ -13,7 +13,7 @@ std::istream &read(std::istream &, SalesData &);
 struct SalesData {
 	SalesData(std::string s, unsigned cnt, double price) : book_no(s), units_sold(cnt), revenue(cnt * price) {std::cout << 1 << std::endl;}
 	SalesData() : SalesData("s", 1, 0) {std::cout << 2 << std::endl;}
-	SalesData(std::string s) : SalesData(s, 1, 0) {std::cout << 3 << std::endl;}
+	explicit SalesData(std::string s) : SalesData(s, 1, 0) {std::cout << 3 << std::endl;}
 	SalesData(std::istream &is) : SalesData() { read(is, *this); std::cout << 4 << std::endl; }
 	std::string Isbn() const {return book_no;}
 	SalesData &Combine(const SalesData &);	//const reference can refer to a temporary
