@@ -24,6 +24,7 @@ public:
 	pos size() const;
 
 	friend class WindowMrg;
+	friend class WindowMgr;
 //	friend WindowMrg::Clear(ScreenIndex);	//first WindowMrg and declare Clear(), then Screen, then define Clear()
 
 private:
@@ -70,16 +71,16 @@ inline void Screen::do_display(std::ostream &os) const {
 	os << std::endl;
 }
 
-class WindowMrg {
-public:
-	using ScreenIndex = std::vector<Screen>::size_type;
-	WindowMrg() = default;
-	virtual ~WindowMrg();
-
-	void Clear(ScreenIndex);
-	ScreenIndex addScreen(const Screen &s);
-private:
-	std::vector<Screen> screens{ Screen(24, 80, ' ') };
-};
+//class WindowMrg {
+//public:
+//	using ScreenIndex = std::vector<Screen>::size_type;
+//	WindowMrg() = default;
+//	virtual ~WindowMrg();
+//
+//	void Clear(ScreenIndex);
+//	ScreenIndex addScreen(const Screen &s);
+//private:
+//	std::vector<Screen> screens{ Screen(24, 80, ' ') };
+//};
 
 #endif

@@ -10,15 +10,15 @@ Screen::pos Screen::size() const {
 }
 
 
-void WindowMrg::Clear(ScreenIndex i) {
-	Screen &s = screens[i];
-	s.contents = std::string(s.height * s.width, ' ');
-}
-
-WindowMrg::ScreenIndex WindowMrg::addScreen(const Screen &s) {
-	screens.push_back(s);
-	return screens.size() - 1;
-}
+//void WindowMrg::Clear(ScreenIndex i) {
+//	Screen &s = screens[i];
+//	s.contents = std::string(s.height * s.width, ' ');
+//}
+//
+//WindowMrg::ScreenIndex WindowMrg::addScreen(const Screen &s) {
+//	screens.push_back(s);
+//	return screens.size() - 1;
+//}
 
 //int main()
 //{
