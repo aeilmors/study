@@ -1,0 +1,56 @@
+div, p, img {
+    display: block;
+    margin: auto;
+}
+
+p {
+    text-align: center;
+    width: 1075px;
+    height: 17px;
+    color: #5D7389;
+    background-color: #BECDDD;
+}
+
+span {
+    display: inline-block;
+    width: 50px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:link {
+    color: #363636;
+}
+
+a:hover {
+    color: #B88B00;
+}
+
+button {
+    border: #234464 1px solid;
+    width: 50px;
+    height: 20px;
+    position: relative;
+    left: 5%;
+    cursor: pointer;
+}
+
+.middle {
+    margin: 15px 0 15px 0;
+}
+
+#middle {
+    position: relative;
+    left: 40%;
+    margin-top: 40px;
+}
+
+.verifyCode {
+    display: inline;
+}
+
+#footer {
+    margin-top: 100px;
+}
