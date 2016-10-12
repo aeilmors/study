@@ -1,0 +1,295 @@
+# HTML(Hyper Text Markup Language)
+### 语法
+```
+<tag property="value">element</tag>
+<tag property="value" />
+<!-- This is a comment -->
+```
+
+### 常见标签
+```
+<html>
+<body>
+<h1>~<h6>
+<p>
+<br>
+```
+note: 源代码中连续的换行，空格会处理成一个空格.要显示的话可以考虑```<pre>```标签
+
+### 常见属性
+- class
+- id
+- style
+- title
+
+### 样式
+- 内联样式
+```
+<tag style="property: value; property: value; property: value">element</tag>
+```
+- 内部样式表
+```
+<html>
+<head>
+<style type="text/css">
+p, div {
+color:red;
+}
+</style>
+</head>
+<body>
+</body>
+</html>
+```
+- 外部样式表
+```
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/style/xx.css">
+</head>
+<body>
+</body>
+</html>
+```
+- (浏览器缺省设置)
+
+### 格式化
+- 文本格式化标签
+    - ```<b>```粗体文本
+    - ```<big>```大号字
+    - ```<em>```着重文字
+    - ```<i>```斜体字
+    - ```<small>```小号字
+    - ```<strong>```加重语气
+    - ```<sub>```下标
+    - ```<sup>```上标
+    - ```<ins>```插入字
+    - ```<del>```删除字
+    - <del>```<s>```</del>使用```<del>```替代
+    - <del>```<strike>```</del>使用```<del>```替代
+    - <del>```<u>```</del>使用样式替代
+- 计算机输出标签
+    - ```<code>```计算机代码
+    - ```<kbd>```键盘码
+    - ```<samp>```计算机代码样本
+    - ```<tt>```打字机代码
+    - ```<var>```定义变量
+    - ```<pre>```定义预格式文本
+    - <del>```<listing>```</del>使用```<pre>```替代
+    - <del>```<plaintext>```</del>使用```<pre>```替代
+    - <del>```<xmp>```</del>使用```<pre>```替代
+- 引用, 引用和术语定义
+    - ```<abbr>```定义缩写
+    - ```<acronym>```定义首字母缩写
+    - ```<address>```定义地址
+    - ```<bdo>```定义文字方向
+    - ```<blockquote>```定义长引用
+    - ```<q>```定义短引用
+    - ```<cite>```定义引用,引证
+    - ```<dfn>```定义一个定义项目
+
+### 链接
+```
+<a href="http://git.cs#mark">链接</a>
+<a name="mark">书签</a>
+```
+
+### 图像
+```
+<img src="http://xxx" alt="xxx" />
+```
+
+### 表格
+```
+<table>
+<tr>
+<td>xx</td>
+<td>XX</td>
+</tr>
+</table>
+```
+
+### 列表
+- 无序列表
+```
+<ul>
+<li>xx</li>
+</ul>
+```
+- 有序列表
+```
+<ol>
+<li>xx</li>
+</ol>
+```
+- 自定义列表
+```
+<dl>
+<dt>Coffee</dt>
+<dd>Black hot drink</dd>
+<dt>Milk</dt>
+<dd>White cold drink</dd>
+</dl>
+```
+
+### 块元素(block level element)&内联元素(inline level element)
+- block level
+    - ```<div>```
+    - ```<p>```
+    - ```<h1>```
+    - ```<ul>```
+    - ```<table>```
+- inline level
+    - ```<span>```
+    - ```<b>```
+    - ```<td>```
+    - ```<a>```
+    - ```<img>```
+
+### 响应式设计
+一种设计理念: 可在不同尺寸的设备上表现出适合的展示效果
+
+### 框架
+```
+<frameset cols="25%, 75%">
+    <frame src="xxx.html">
+    <frameset rows="50%, 50%">
+        <frame src="xxx.html">
+        <frame src="xxx.html">
+    </frameset>
+</frame>
+```
+```
+<iframe src="URL"></iframe>
+```
+
+### 背景
+- <del>```<body bgcolor="red">```</del>背景颜色
+- <del>```<body background="cloud.gif">```</del>背景图片
+
+### 脚本(script)
+给点文字
+```
+<script type="text/javascript" src="xx.js">
+```
+
+### 头部
+- ```<head>```定义关于文档的信息
+- ```<title>```定义文档标题
+- ```<base>```定义页面上所有链接的默认地址或默认目标
+- ```<link>```定义文档与外部资源之间的关系
+- ```<style>```定义文档的样式信息
+- ```<meta>```定义关于html文档的元数据
+- ```<script>```定义客户端脚本
+
+### 实体符号
+比如```<```对应```&lt```或者```&#60```
+
+### 文档类型
+```
+<!DOCTYPE html>
+```
+
+### 表单
+- 标签
+    - ```<form>```
+    - ```<input>```
+    - ```<select>```
+    - ```<option>```
+    - ```<textarea>```
+    - ```<button>```
+- 类型
+    - text
+    - password
+    - submit
+    - radio
+    - checkbox
+    - button
+    - number
+    - date
+    - color
+    - range
+    - month
+    - week
+    - time
+    - datetime
+    - datetime-local
+    - email
+    - search
+    - tel
+    - url
+- 属性
+    - value
+    - readonly
+    - disabled
+    - size
+    - maxlength
+    - autocomplete
+    - novalidate
+    - autofocus
+    - form
+    - formaction
+    - formenctype
+    - formmethod
+    - formnovalidate
+    - formtarget
+    - height和width
+    - list
+    - min和max
+    - multiple
+    - pattern
+    - placeholder
+    - required
+    - step
+
+# css(Cascading Style Sheets)
+### 语法
+```
+selector {
+property: value value value "va lue";
+property: value
+}
+```
+
+### 选择器
+- 分组
+```
+selector1, selector2 {
+...
+}
+```
+- 继承: 子元素从父元素继承属性
+- 派生选择器
+```
+li strong {
+...
+}
+li > strong {
+...
+}
+li + p {
+...
+}
+```
+- id选择器
+```
+#id {
+...
+}
+```
+- 类选择器
+```
+.class {
+...
+}
+```
+- 属性选择器
+```
+[property]
+[property=value]
+[property~=value]
+[property|=value]
+[property^=value]
+[property$=value]
+[property*=value]
+```
